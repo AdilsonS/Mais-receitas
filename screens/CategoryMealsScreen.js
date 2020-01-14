@@ -23,6 +23,7 @@ const CategoryMealsScreen = props => {
   );
 };
 
+
 CategoryMealsScreen.navigationOptions = (navigationData) => {
   const category = navigationData.navigation.state.params;
 

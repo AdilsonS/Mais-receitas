@@ -29,11 +29,12 @@ const CategoriesScreen = props => {
   );
 };
 
-CategoriesScreen.navigationOptions = {
-  headerTitle: 'Meal Categories',
-  headerStyle: { backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : Colors.accenteColor },
-  headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.black,
-};
+//TODO Cofiguração enviada para o arquivo MealsNavigator
+// CategoriesScreen.navigationOptions = {
+//   headerTitle: 'Meal Categories',
+//   headerStyle: { backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : Colors.accenteColor },
+//   headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.black,
+// };
 
 const styles = StyleSheet.create({
   grideItem: {
