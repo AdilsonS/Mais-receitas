@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
 import DefaultStyle from '../constants/style.js';
 
@@ -7,6 +7,9 @@ const CategoryMealsScreen = props => {
   return (
     <View style={DefaultStyle.screen}>
       <Text>CategoryMealsScreen</Text>
+      <Button title='Go to detail' onPress={() => {
+        props.navigation.navigate({ routeName: 'MealDetail' })
+      }} />
     </View>
   );
 };
