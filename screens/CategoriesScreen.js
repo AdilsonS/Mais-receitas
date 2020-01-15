@@ -6,6 +6,7 @@ import GridOrList from '../components/GridOrList';
 
 const CategoriesScreen = props => {
   const nav = (itemData) => {
+    //TODO Deve ser passado um objeto como parametro
     props.navigation.navigate({ routeName: 'CategoryMeals', params: itemData.item })
   }
 

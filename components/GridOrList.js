@@ -25,7 +25,7 @@ const GridCategory = props => {
     if (isDetail)
       renderDetail =
         <View style={styles.containerDetail}>
-          <Text>{itemData.item.duration}</Text>
+          <Text>{itemData.item.duration}m</Text>
           <Text>{itemData.item.complexity}</Text>
           <Text>{itemData.item.affordability}</Text>
         </View>

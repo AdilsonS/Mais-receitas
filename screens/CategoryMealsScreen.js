@@ -15,11 +15,13 @@ const CategoryMealsScreen = props => {
   //const pageTitle = props.navigation.getParam('title');
   //#endregion
   const nav = (itemData) => {
-    console.log('apertei ', itemData)
+    //TODO Deve ser passado um objeto como parametro(params)
+    props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item, category: category } })
   }
 
-  const catId = props.navigation.getParam('id');
-  const displayMeals = Meals.filter(m => m.categoryIds.indexOf(catId) >= 0);
+  //const catId = props.navigation.getParam('id');
+  const category = props.navigation.state.params;
+  const displayMeals = Meals.filter(m => m.categoryIds.indexOf(category.id) >= 0);
 
   return (
     <GridOrList
