@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
 
-import DefaultStyle from '../constants/style.js';
 import Colors from '../constants/colors'
-import { Categories, Meals } from '../data/dummy-data.js';
+import { Meals } from '../data/dummy-data.js';
+import GridOrList from '../components/GridOrList'
 
 
 const CategoryMealsScreen = props => {
+  //#region 
   //TODO Caso seja passado apenas o Id fariamos uma busca dentro das categorias existentes
   //const selectCategory = Categories.find('id');
 
   //TODO Obtendo apenas uma propriedade passada
   //const pageTitle = props.navigation.getParam('title');
+  //#endregion
+  const nav = (itemData) => {
+    console.log('apertei ', itemData)
+  }
+
   const catId = props.navigation.getParam('id');
   const displayMeals = Meals.filter(m => m.categoryIds.indexOf(catId) >= 0);
 
   return (
-    <View style={DefaultStyle.screen}>
-      <Text>CategoryMealsScreen</Text>
-      <Button title='Go to detail' onPress={() => {
-        props.navigation.navigate({ routeName: 'MealDetail' })
-      }} />
-    </View>
+    <GridOrList
+      data={displayMeals}
+      isDetail={true}
+      isImage={true}
+      columns={1}
+      onPressGrid={nav}
+      style={styles.line}
+    />
   );
 };
-
 
 CategoryMealsScreen.navigationOptions = (navigationData) => {
   const category = navigationData.navigation.state.params;
@@ -37,7 +44,9 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 };
 
 const styles = StyleSheet.create({
-
+  line: {
+    height: Dimensions.get('window').height * 0.30,
+  }
 });
 
 export default CategoryMealsScreen;

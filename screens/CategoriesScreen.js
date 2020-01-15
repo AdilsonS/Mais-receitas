@@ -1,32 +1,21 @@
 import React from 'react';
-import { StyleSheet, FlatList } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { Categories } from '../data/dummy-data';
-import GridCategory from '../components/GridCategory';
+import GridOrList from '../components/GridOrList';
 
 const CategoriesScreen = props => {
-
-  const nav = item => {
-    props.navigation.navigate({ routeName: 'CategoryMeals', params: item })
+  const nav = (itemData) => {
+    props.navigation.navigate({ routeName: 'CategoryMeals', params: itemData.item })
   }
 
-  const renderGriItem = (itemData) => {
-    return (
-      <GridCategory
-        category={itemData.item}
-        onPressCategory={nav.bind(this, itemData.item)}
-      />
-    )
-  };
-
   return (
-    <FlatList
-      keyExtractor={(item, index) => item.id}
+    <GridOrList
       data={Categories}
-      renderItem={renderGriItem}
-      numColumns={2}
+      columns={2}
+      onPressGrid={nav}     
     />
-  );
+  )
 };
 
 //TODO Cofiguração enviada para o arquivo MealsNavigator
@@ -37,7 +26,7 @@ const CategoriesScreen = props => {
 // };
 
 const styles = StyleSheet.create({
-
+ 
 });
 
 export default CategoriesScreen;
