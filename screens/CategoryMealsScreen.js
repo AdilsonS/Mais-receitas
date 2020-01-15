@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 
 import DefaultStyle from '../constants/style.js';
 import Colors from '../constants/colors'
-//import { Categories } from '../data/dummy-data.js';
+import { Categories, Meals } from '../data/dummy-data.js';
 
 
 const CategoryMealsScreen = props => {
@@ -12,6 +12,8 @@ const CategoryMealsScreen = props => {
 
   //TODO Obtendo apenas uma propriedade passada
   //const pageTitle = props.navigation.getParam('title');
+  const catId = props.navigation.getParam('id');
+  const displayMeals = Meals.filter(m => m.categoryIds.indexOf(catId) >= 0);
 
   return (
     <View style={DefaultStyle.screen}>
