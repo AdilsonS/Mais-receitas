@@ -8,7 +8,7 @@ import CustomHeaderButton from '../components/CustomHeaderButton';
 const FiltersScreen = props => {
   return (
     <View style={DefaultStyle.screen}>
-      <Text>FiltersScreen</Text>
+      <DefaultText>FiltersScreen</DefaultText>
     </View>
   );
 };

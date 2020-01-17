@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Text, Platform } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -14,10 +14,11 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import FiltersScreen from '../screens/FiltersScreen';
 
 import Colors from '../constants/colors';
+import DefaultText from '../components/DefaultText';
 
 const defaultStackNavigationOptions = {
   headerStyle: { backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : Colors.accenteColor },
-  headerTitleStyle:{fontFamily:'open-sans-bold'},
+  headerTitleStyle: { fontFamily: 'open-sans-bold' },
   headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.black,
 }
 
@@ -73,18 +74,21 @@ const tabScreenConfig = {
   Meals: {
     screen: MealsNavigator,
     navigationOptions: {
-      tabBarIcon: (tabInfo) => {
-        return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} />
-      },
-      tabBarColor: Colors.primaryColor
+      tabBarIcon: (tabInfo) => { return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} /> },
+      tabBarColor: Colors.primaryColor,
+      tabBarLabel: Platform.OS === 'android'
+        ? <DefaultText style={{ fontFamily: 'open-sans-bold' }}>Meals</DefaultText>
+        : Meals,
     }
   },
   Favorites: {
     screen: FavNavigator,
     navigationOptions: {
-      tabBarLabel: 'Fav',
       tabBarIcon: (tabInfo) => { return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} /> },
-      tabBarColor: Colors.accenteColor
+      tabBarColor: Colors.accenteColor,
+      tabBarLabel: Platform.OS === 'android'
+        ? <DefaultText style={{ fontFamily: 'open-sans-bold' }}>Fav</DefaultText>
+        : Meals,
     }
   }
 };
@@ -95,11 +99,13 @@ const MealsFavTabNavigator =
       activeTintColor: Colors.white,
       shifting: true,
       // shifting: false,
-      // barStyle: { backgroundColor: Colors.primaryColor }
+      // barStyle: {backgroundColor: Colors.primaryColor }
     })
     : createBottomTabNavigator(tabScreenConfig, {
       tabBarOptions: {
         activeTintColor: Colors.white,
+        // TODO Esssa é uma forma de definir estilo dentro do componente createBottomTabNavigator para IOS
+        labelStyle: { fontFamily: 'open-sans' }
       }
     });
 
@@ -120,7 +126,7 @@ const MainNavigation = createDrawerNavigator({
   }
 },
   {
-    drawerPosition:'right',
+    drawerPosition: 'right',
     contentOptions: {
       activeTintColor: Colors.accenteColor,
       labelStyle: {

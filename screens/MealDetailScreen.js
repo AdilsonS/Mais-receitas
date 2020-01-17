@@ -4,12 +4,13 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import DefaultStyle from '../constants/style.js';
 import CustomHeaderButton from '../components/CustomHeaderButton.js';
-import Colors from '../constants/colors'
+import Colors from '../constants/colors';
+import DefaultText from '../components/DefaultText';
 
 const MealDetailScreen = props => {
   return (
     <View style={DefaultStyle.screen}>
-      <Text>MealDetailScreen</Text>
+      <DefaultText>MealDetailScreen</DefaultText>
       <Button title='Go Home' onPress={() => {
         props.navigation.popToTop();
       }} />
@@ -27,8 +28,8 @@ MealDetailScreen.navigationOptions = (navigationData) => {
     //headerTintColor: Colors.primaryColor,
     headerTitle: () =>
       <View>
-        <Text style={styles.title}>Meal Detail</Text>
-        <Text style={styles.subTitle}>{meal.title}</Text>
+        <DefaultText style={styles.title}>Meal Detail</DefaultText>
+        <DefaultText style={styles.subTitle}>{meal.title}</DefaultText>
       </View>
     ,
 

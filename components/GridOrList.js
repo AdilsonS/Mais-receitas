@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, TouchableNativeFeedback, Dimensions, Platform, ImageBackground } from 'react-native';
 
 import Colors from '../constants/colors';
+import DefaultText from './DefaultText';
 
 const GridCategory = props => {
   const { data, isDetail, isImage, onPressGrid, columns, style } = props
@@ -15,19 +16,19 @@ const GridCategory = props => {
     const bkgColor = itemData.item.color != null ? itemData.item.color : 'rgba(0,0,0, 0.3)';
     const txtColor = !isImage ? Colors.black : Colors.white;
 
-    let renderImage = <Text style={{ ...styles.title, ...{ backgroundColor: bkgColor, color: txtColor } }}>{itemData.item.title}</Text>
+    let renderImage = <DefaultText style={{ ...styles.title, ...{ backgroundColor: bkgColor, color: txtColor } }}>{itemData.item.title}</DefaultText>
     if (isImage)
       renderImage = <ImageBackground style={styles.image} source={{ uri: itemData.item.imageUrl }}>
-        <Text style={{ ...styles.title, ...{ backgroundColor: bkgColor, color: txtColor } }}>{itemData.item.title}</Text>
+        <DefaultText style={{ ...styles.title, ...{ backgroundColor: bkgColor, color: txtColor } }}>{itemData.item.title}</DefaultText>
       </ImageBackground>
 
     let renderDetail
     if (isDetail)
       renderDetail =
         <View style={styles.containerDetail}>
-          <Text>{itemData.item.duration}m</Text>
-          <Text>{itemData.item.complexity}</Text>
-          <Text>{itemData.item.affordability}</Text>
+          <DefaultText>{itemData.item.duration}m</DefaultText>
+          <DefaultText>{itemData.item.complexity}</DefaultText>
+          <DefaultText>{itemData.item.affordability}</DefaultText>
         </View>
 
     return (
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    justifyContent:'flex-end',
+    justifyContent: 'flex-end',
     width: Dimensions.get('window').width * 1,
     height: Dimensions.get('window').height * 0.25
   }
