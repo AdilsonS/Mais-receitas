@@ -82,9 +82,7 @@ const tabScreenConfig = {
     screen: FavNavigator,
     navigationOptions: {
       tabBarLabel: 'Fav',
-      tabBarIcon: (tabInfo) => {
-        return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} />
-      },
+      tabBarIcon: (tabInfo) => { return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} /> },
       tabBarColor: Colors.accenteColor
     }
   }
@@ -105,9 +103,29 @@ const MealsFavTabNavigator =
     });
 
 const MainNavigation = createDrawerNavigator({
-  MealsFavTabNavigator: { screen: MealsFavTabNavigator },
-  FilterNavigation: { screen: FilterNavigation }
-});
+  MealsFavTabNavigator: {
+    screen: MealsFavTabNavigator,
+    navigationOptions: {
+      drawerLabel: 'Home',
+      drawerIcon: (drawerInfo) => { return <Ionicons name='ios-home' size={25} color={drawerInfo.tintColor} /> }
+    }
+  },
+  FilterNavigation: {
+    screen: FilterNavigation,
+    navigationOptions: {
+      drawerLabel: 'Filters',
+      drawerIcon: (drawerInfo) => { return <Ionicons name='ios-search' size={25} color={drawerInfo.tintColor} /> }
+    }
+  }
+},
+  {
+    contentOptions: {
+      activeTintColor: Colors.accenteColor,
+      labelStyle: {
+        fontFamily: 'open-sans-bold'
+      }
+    }
+  });
 
 
 export default createAppContainer(MainNavigation);
