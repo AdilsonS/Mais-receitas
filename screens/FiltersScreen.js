@@ -15,7 +15,7 @@ const FiltersScreen = props => {
 
 FiltersScreen.navigationOptions = (navigationData) => {
   return {
-    headerLeft: () =>
+    headerRight: () =>
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title='Menu'

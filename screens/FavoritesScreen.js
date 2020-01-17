@@ -28,7 +28,7 @@ const FavoritesScreen = props => {
 
 FavoritesScreen.navigationOptions = (navigationData) => {
   return {
-    headerLeft: () =>
+    headerRight: () =>
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title='Menu'

@@ -119,6 +119,7 @@ const MainNavigation = createDrawerNavigator({
   }
 },
   {
+    drawerPosition:'right',
     contentOptions: {
       activeTintColor: Colors.accenteColor,
       labelStyle: {

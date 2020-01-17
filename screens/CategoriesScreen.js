@@ -23,7 +23,7 @@ const CategoriesScreen = props => {
 
 CategoriesScreen.navigationOptions = (navigationData) => {
   return {
-    headerLeft: () =>
+    headerRight: () =>
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title='Menu'
