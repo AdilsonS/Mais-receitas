@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import CustomHeaderButton from '../components/CustomHeaderButton.js';
-
+  
 import DefaultStyle from '../constants/style.js';
+import CustomHeaderButton from '../components/CustomHeaderButton.js';
 
 const MealDetailScreen = props => {
   return (

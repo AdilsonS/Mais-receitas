@@ -1,8 +1,10 @@
 import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
 import { Meals } from '../data/dummy-data';
 import GridOrList from '../components/GridOrList';
+import CustomHeaderButton from '../components/CustomHeaderButton';
 
 const FavoritesScreen = props => {
   //console.log('props ', props.navigation.state.params);
@@ -22,6 +24,18 @@ const FavoritesScreen = props => {
       style={styles.line}
     />
   );
+};
+
+FavoritesScreen.navigationOptions = (navigationData) => {
+  return {
+    headerLeft: () =>
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title='Menu'
+          iconName='ios-menu'
+          onPress={() => navigationData.navigation.toggleDrawer()} />
+      </HeaderButtons>
+  }
 };
 
 const styles = StyleSheet.create({
