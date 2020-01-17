@@ -13,14 +13,16 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 
 import Colors from '../constants/colors';
 
+const defaultStackNavigationOptions = {
+  headerStyle: { backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : Colors.accenteColor },
+  headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.black,
+}
+
 const MealsNavigator = createStackNavigator({
   Categories: {
     screen: CategoriesScreen,
     //TODO As configurações feitas aqui sobrepõe todas as outras
-    navigationOptions:
-    {
-      headerTitle: 'Meal Categories'
-    }
+    navigationOptions: { headerTitle: 'Meal Categories' }
   },
 
   CategoryMeals: {
@@ -35,11 +37,21 @@ const MealsNavigator = createStackNavigator({
     //TODO Define a tela inicial, caso não seja definido sera utilizado a primeira da fila
     initialRouteName: 'Categories',
     //TODO As configurações feitas aqui podem ser sobreposta por qualquer outra configuração
-    defaultNavigationOptions: {
-      headerStyle: { backgroundColor: Platform.OS === 'android' ? Colors.primaryColor : Colors.accenteColor },
-      headerTintColor: Platform.OS === 'android' ? Colors.white : Colors.black,
-    }
+    defaultNavigationOptions: defaultStackNavigationOptions
   });
+
+const FavNavigator = createStackNavigator({
+  Favorites: {
+    screen: FavoritesScreen,
+    navigationOptions: { headerTitle: 'Meal Favorites', }
+  },
+  MealDetail: {
+    screen: MealDetailScreen
+  }
+}, {
+  initialRouteName: 'Favorites',
+  defaultNavigationOptions: defaultStackNavigationOptions
+})
 
 const tabScreenConfig = {
   Meals: {
@@ -52,7 +64,7 @@ const tabScreenConfig = {
     }
   },
   Favorites: {
-    screen: FavoritesScreen,
+    screen: FavNavigator,
     navigationOptions: {
       tabBarLabel: 'Fav',
       tabBarIcon: (tabInfo) => {

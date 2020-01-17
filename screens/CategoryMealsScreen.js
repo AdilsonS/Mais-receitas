@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
 
-import Colors from '../constants/colors'
 import { Meals } from '../data/dummy-data.js';
 import GridOrList from '../components/GridOrList'
 
@@ -32,6 +31,7 @@ const CategoryMealsScreen = props => {
       onPressGrid={nav}
       style={styles.line}
     />
+
   );
 };
 
@@ -40,8 +40,8 @@ CategoryMealsScreen.navigationOptions = (navigationData) => {
 
   return {
     headerTitle: category.title,
-    headerStyle: { backgroundColor: category.color },
-    headerTintColor: Colors.primaryColor
+    // headerStyle: { backgroundColor: category.color },
+    // headerTintColor: Colors.primaryColor
   };
 };
 

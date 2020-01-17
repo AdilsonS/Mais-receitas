@@ -4,8 +4,6 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../components/CustomHeaderButton.js';
 
 import DefaultStyle from '../constants/style.js';
-import Colors from '../constants/colors.js';
-
 
 const MealDetailScreen = props => {
   return (
@@ -18,14 +16,14 @@ const MealDetailScreen = props => {
   );
 };
 
-MealDetailScreen.navigationOptions = (navigationData) => {
-  const category = navigationData.navigation.state.params.category;
+MealDetailScreen.navigationOptions = (navigationData) => {  
+  // const category = navigationData.navigation.state.params.category;
   const meal = navigationData.navigation.state.params.meal;
 
   return {
     headerTitle: meal.title,
-    headerStyle: { backgroundColor: category.color },
-    headerTintColor: Colors.primaryColor,
+    //headerStyle: { backgroundColor: category.color },
+    //headerTintColor: Colors.primaryColor,
     headerRight: () =>
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
