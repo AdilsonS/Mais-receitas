@@ -3,5 +3,6 @@ export default {
   accenteColor: '#ff6f00',
   white: 'white',
   black: 'black',
-  grey: '#e2e2e2'
+  grey: '#e2e2e2',
+  lightBlue: '#47fced'
 }

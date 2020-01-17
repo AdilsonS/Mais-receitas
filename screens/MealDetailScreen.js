@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
     fontFamily: 'open-sans-bold',
     marginLeft: 10,
     fontSize: 16
-
   }
 });
 
