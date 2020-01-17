@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet, Button, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-  
+
 import DefaultStyle from '../constants/style.js';
 import CustomHeaderButton from '../components/CustomHeaderButton.js';
+import Colors from '../constants/colors'
 
 const MealDetailScreen = props => {
   return (
@@ -16,14 +17,21 @@ const MealDetailScreen = props => {
   );
 };
 
-MealDetailScreen.navigationOptions = (navigationData) => {  
+MealDetailScreen.navigationOptions = (navigationData) => {
   // const category = navigationData.navigation.state.params.category;
   const meal = navigationData.navigation.state.params.meal;
 
   return {
-    headerTitle: meal.title,
+    //headerTitle: meal.title,
     //headerStyle: { backgroundColor: category.color },
     //headerTintColor: Colors.primaryColor,
+    headerTitle: () =>
+      <View>
+        <Text style={styles.title}>Meal Detail</Text>
+        <Text style={styles.subTitle}>{meal.title}</Text>
+      </View>
+    ,
+
     headerRight: () =>
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
@@ -31,11 +39,19 @@ MealDetailScreen.navigationOptions = (navigationData) => {
           iconName='ios-star-outline'
           onPress={() => { console.log('apertou') }} />
       </HeaderButtons>
+    ,
   }
 };
 
 const styles = StyleSheet.create({
-
+  title: {
+    color: Platform.OS === 'android' ? Colors.white : Colors.black,
+    fontSize: 18,
+    fontFamily: 'open-sans-bold',
+  },
+  subTitle: {
+    color: Platform.OS === 'android' ? Colors.white : Colors.black,
+  },
 });
 
 export default MealDetailScreen;
