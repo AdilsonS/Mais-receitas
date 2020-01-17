@@ -1,20 +1,47 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button, Platform } from 'react-native';
+import { View, ScrollView, Image, StyleSheet, Platform, Dimensions } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 
-import DefaultStyle from '../constants/style.js';
 import CustomHeaderButton from '../components/CustomHeaderButton.js';
 import Colors from '../constants/colors';
 import DefaultText from '../components/DefaultText';
 
+const renderListIngredients = (ingredients, index) => {
+  return <DefaultText key={index}> {ingredients}</DefaultText>
+};
+
+const renderListSteps = (steps, index) => {
+  return <DefaultText key={index}>{index + 1}º - {steps}</DefaultText>
+};
+
 const MealDetailScreen = props => {
+  const meal = props.navigation.state.params.meal;
   return (
-    <View style={DefaultStyle.screen}>
-      <DefaultText>MealDetailScreen</DefaultText>
-      <Button title='Go Home' onPress={() => {
-        props.navigation.popToTop();
-      }} />
-    </View>
+    <ScrollView>
+      <View style={styles.containerImage}>
+        <Image style={styles.image} source={{ uri: meal.imageUrl }} />
+      </View>
+      <View style={styles.containerDetail}>
+        <DefaultText>{meal.duration}m</DefaultText>
+        <DefaultText>{meal.complexity}</DefaultText>
+        <DefaultText>{meal.affordability}</DefaultText>
+      </View>
+
+
+      <DefaultText style={styles.titleList}>Ingredients</DefaultText>
+      <View style={styles.containerList}>
+        {meal.ingredients.map((ingredients, index) => <DefaultText key={index}> {ingredients}</DefaultText>)}
+      </View>
+
+
+      <DefaultText style={styles.titleList}>Steps</DefaultText>
+      <View style={styles.containerList}>
+        {meal.steps.map((steps, index) => renderListSteps(steps, index))}
+      </View>
+
+      {/* TODO Botao com a função de voltar ao inicio
+      <Button title='Go Home' onPress={() => props.navigation.popToTop()} /> */}
+    </ScrollView>
   );
 };
 
@@ -53,6 +80,33 @@ const styles = StyleSheet.create({
   subTitle: {
     color: Platform.OS === 'android' ? Colors.white : Colors.black,
   },
+  image: {
+    width: '100%',
+    height: '100%'
+  },
+
+  containerImage: {
+    width: Dimensions.get('window').width * 1,
+    height: Dimensions.get('window').height * 0.3
+  },
+
+  containerDetail: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+
+  containerList: {
+    marginLeft: 15,
+  },
+
+  titleList: {
+    fontFamily: 'open-sans-bold',
+    marginLeft: 10,
+    fontSize: 16
+
+  }
 });
 
 export default MealDetailScreen;
