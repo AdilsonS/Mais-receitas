@@ -1,19 +1,40 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Switch, TouchableNativeFeedback, Dimensions } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { Ionicons } from '@expo/vector-icons';
 
+import Colors from '../constants/colors';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import DefaultSwitch from '../components/DefaultSwitch';
-import Colors from '../constants/colors';
+import DefaultText from '../components/DefaultText';
+
 
 const FiltersScreen = props => {
+  const { navigation } = props
   const [isGlutemFree, setIsGlutemFree] = useState(false);
   const [isLactoseFree, setIsLactoseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
+  const saveFilters = useCallback(() => {
+    const appliedFilters = {
+      glutemFree: isGlutemFree,
+      lactoseFree: isLactoseFree,
+      vegan: isVegan,
+      vegetarian: isVegetarian,
+    }
+
+    console.log('appliedFilters ', appliedFilters);
+  }, [isGlutemFree, isLactoseFree, isVegan, isVegetarian]);
+
+  useEffect(() => {
+    navigation.setParams({ save: saveFilters });
+  }, [saveFilters]);
+
   return (
     <View style={styles.screen}>
+      <DefaultText style={styles.title}>Avaliable fitlter/restrictions</DefaultText>
+
       <DefaultSwitch
         labelSwitch='Gluten free'
         value={isGlutemFree}
@@ -49,6 +70,10 @@ const FiltersScreen = props => {
         useColorLabel={true}
         style={styles.switch}
       />
+
+      {/* <View style={styles.buttonSave}>
+        <Ionicons name='ios-save' size={50} color={Colors.black} />
+      </View> */}
     </View>
 
   );
@@ -56,13 +81,23 @@ const FiltersScreen = props => {
 
 FiltersScreen.navigationOptions = (navigationData) => {
   return {
-    headerRight: () =>
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title='Menu'
-          iconName='ios-menu'
-          onPress={() => navigationData.navigation.toggleDrawer()} />
-      </HeaderButtons>
+    headerRight: () => (
+      <View style={styles.containerHeaderButton}>
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title='Save'
+            iconName='ios-save'
+            onPress={navigationData.navigation.getParam('save')} />
+        </HeaderButtons>
+
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title='Menu'
+            iconName='ios-menu'
+            onPress={() => navigationData.navigation.toggleDrawer()} />
+        </HeaderButtons>
+      </View>
+    )
   }
 };
 
@@ -79,8 +114,18 @@ const styles = StyleSheet.create({
 
   switch: {
     marginTop: Dimensions.get('window').height * 0.03
+  },
+
+  containerHeaderButton: {
+    flexDirection: 'row',
   }
 
+  // buttonSave: {
+  //   flex: 1,
+  //   alignItems: 'flex-end',
+  //   justifyContent: 'flex-end',
+  //   margin: 10
+  // }
 });
 
 export default FiltersScreen;
