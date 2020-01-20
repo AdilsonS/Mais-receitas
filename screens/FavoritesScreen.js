@@ -8,10 +8,9 @@ import CustomHeaderButton from '../components/CustomHeaderButton';
 
 const FavoritesScreen = props => {
   const favorites = useSelector(state => state.meals.favoriteMeals);
-  //const favorites = Meals.filter(meal => meal.id === 'm1' || meal.id === 'm2')
-
   const nav = (itemData) => {
-    props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item } })
+    const isFavorite = favorites.some(ml => ml.id === itemData.item.id);
+    props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item, isFavorite: isFavorite } })
   }
 
   return (

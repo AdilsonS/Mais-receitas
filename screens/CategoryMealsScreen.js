@@ -12,14 +12,18 @@ const CategoryMealsScreen = props => {
   //TODO Obtendo apenas uma propriedade passada
   //const pageTitle = props.navigation.getParam('title');
   //#endregion
+  const favorites = useSelector(state => state.meals.favoriteMeals);
   const nav = (itemData) => {
+    const isFavorite = favorites.some(ml => ml.id === itemData.item.id);
     //TODO Deve ser passado um objeto como parametro(params)
-    props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item, category: category } })
+    props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item, category: category, isFavorite: isFavorite } })
   }
+
+
 
   //const catId = props.navigation.getParam('id');
   const category = props.navigation.state.params;
-   
+
   const availableMeals = useSelector(state => state.meals.filteredMeals);
   const displayMeals = availableMeals.filter(m => m.categoryIds.indexOf(category.id) >= 0);
   //const displayMeals = Meals.filter(m => m.categoryIds.indexOf(category.id) >= 0);
