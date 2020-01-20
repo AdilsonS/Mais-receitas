@@ -16,7 +16,6 @@ const FavoritesScreen = props => {
     props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item, isFavorite: isFavorite } })
   }
 
-
   if (favorites.length === 0 || !favorites)
     return (
       <View style={DefaultStyle.screen}>
