@@ -1,14 +1,14 @@
 import React from 'react';
 import { Dimensions, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 
-import { Meals } from '../data/dummy-data';
 import GridOrList from '../components/GridOrList';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 
 const FavoritesScreen = props => {
-  //console.log('props ', props.navigation.state.params);
-  const favorites = Meals.filter(meal => meal.id === 'm1' || meal.id === 'm2')
+  const favorites = useSelector(state => state.meals.favoriteMeals);
+  //const favorites = Meals.filter(meal => meal.id === 'm1' || meal.id === 'm2')
 
   const nav = (itemData) => {
     props.navigation.navigate({ routeName: 'MealDetail', params: { meal: itemData.item } })

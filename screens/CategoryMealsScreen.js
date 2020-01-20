@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
+import { useSelector } from 'react-redux';
 
-import { Meals } from '../data/dummy-data.js';
-import GridOrList from '../components/GridOrList'
-
+import GridOrList from '../components/GridOrList';
 
 const CategoryMealsScreen = props => {
   //#region 
@@ -20,7 +19,10 @@ const CategoryMealsScreen = props => {
 
   //const catId = props.navigation.getParam('id');
   const category = props.navigation.state.params;
-  const displayMeals = Meals.filter(m => m.categoryIds.indexOf(category.id) >= 0);
+   
+  const availableMeals = useSelector(state => state.meals.filteredMeals);
+  const displayMeals = availableMeals.filter(m => m.categoryIds.indexOf(category.id) >= 0);
+  //const displayMeals = Meals.filter(m => m.categoryIds.indexOf(category.id) >= 0);
 
   return (
     <GridOrList
