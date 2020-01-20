@@ -1,51 +1,53 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { Ionicons } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
 
 import Colors from '../constants/colors';
 import CustomHeaderButton from '../components/CustomHeaderButton';
 import DefaultSwitch from '../components/DefaultSwitch';
 import DefaultText from '../components/DefaultText';
+import { setFilters } from '../store/actions/meals';
+
 
 
 const FiltersScreen = props => {
-  const { navigation } = props
-  const [isGlutemFree, setIsGlutemFree] = useState(false);
-  const [isLactoseFree, setIsLactoseFree] = useState(false);
+  const { navigation } = props;
+  const dispatch = useDispatch();
+  const [isGlutenFree, setIsGlutenFree] = useState(false);
+  const [isLactorseFree, setIsLactorseFree] = useState(false);
   const [isVegan, setIsVegan] = useState(false);
   const [isVegetarian, setIsVegetarian] = useState(false);
 
   const saveFilters = useCallback(() => {
     const appliedFilters = {
-      glutemFree: isGlutemFree,
-      lactoseFree: isLactoseFree,
+      glutemFree: isGlutenFree,
+      lactoseFree: isLactorseFree,
       vegan: isVegan,
       vegetarian: isVegetarian,
     }
-
-    console.log('appliedFilters ', appliedFilters);
-  }, [isGlutemFree, isLactoseFree, isVegan, isVegetarian]);
+    dispatch(setFilters(appliedFilters));
+  }, [isGlutenFree, isLactorseFree, isVegan, isVegetarian, dispatch]);
 
   useEffect(() => {
     navigation.setParams({ save: saveFilters });
   }, [saveFilters]);
-
+  
   return (
     <View style={styles.screen}>
       <DefaultText style={styles.title}>Avaliable fitlter/restrictions</DefaultText>
 
       <DefaultSwitch
         labelSwitch='Gluten free'
-        value={isGlutemFree}
-        onValueChange={newValue => setIsGlutemFree(newValue)}
+        value={isGlutenFree}
+        onValueChange={newValue => setIsGlutenFree(newValue)}
         style={styles.switch}
       />
 
       <DefaultSwitch
         labelSwitch='Lactose free'
-        value={isLactoseFree}
-        onValueChange={newValue => setIsLactoseFree(newValue)}
+        value={isLactorseFree}
+        onValueChange={newValue => setIsLactorseFree(newValue)}
         trackColor={Colors.primaryColor}
         thumbColor={Colors.primaryColor}
         useColorLabel={true}
